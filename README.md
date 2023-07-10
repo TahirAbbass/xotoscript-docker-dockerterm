@@ -17,6 +17,12 @@ git clone https://github.com/xotoscript/xotoscript-docker-dockerterm.git ./docke
 docker-compose build --no-cache && docker run -it --rm dockerterm-dockerterm
 ```
 
+### 🚀 run with shell
+```shell
+# run shell on a new instance of ubuntu
+sh ./packages/setup.sh
+```
+
 ### ☁️ push to docker
 ```shell
 # login to docker hub
