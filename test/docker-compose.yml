@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  sut:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - base-image
+
+  # BASE IMAGE TO BE TESTED BY SUT
+  base-image:
+    image: dockerterm/base-image:sut
+    build: .
