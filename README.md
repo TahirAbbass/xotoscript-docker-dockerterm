@@ -5,19 +5,19 @@
 - Docker v3
 - Bash
 
-### clone
+### ➡️ clone
 ```shell
 # ⚠️ important : clone this way :
 git clone https://github.com/xotoscript/xotoscript-docker-dockerterm.git ./dockerterm
 ```
 
-### run with docker
+### 👾 run with docker
 ```shell
 # build and run from project folder name
 docker-compose build --no-cache && docker run -it --rm dockerterm-dockerterm
 ```
 
-### push to docker
+### ☁️ push to docker
 ```shell
 # login to docker hub
 docker login
@@ -27,7 +27,7 @@ docker push {DOCKER_USERNAME}/dockerterm-dockerterm
 cd /home docker run --rm -it -v $PWD:/xotosphere {DOCKER_USERNAME}/dockerterm-dockerterm:latest
 ```
 
-### clean
+### 🧽 clean
 ```shell
 # clean full docker
 sh clean
