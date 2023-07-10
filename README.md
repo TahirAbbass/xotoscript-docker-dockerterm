@@ -30,7 +30,7 @@ docker login
 # push to docker hub
 docker push {DOCKER_USERNAME}/dockerterm-dockerterm
 # run machine from remote
-cd /home docker run --rm -it -v $PWD:/xotosphere {DOCKER_USERNAME}/dockerterm-dockerterm:latest
+cd /home docker run --rm -it -v $PWD:/{USERNAME} {DOCKER_USERNAME}/dockerterm-dockerterm:latest
 ```
 
 ### 🧽 clean
