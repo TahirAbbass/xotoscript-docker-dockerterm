@@ -11,7 +11,7 @@
 git clone https://github.com/xotoscript/xotoscript-docker-dockerterm.git ./dockerterm
 ```
 
-## run with docker
+### run with docker
 ```shell
 # build and run from project folder name
 docker-compose build --no-cache && docker run -it --rm dockerterm-dockerterm
