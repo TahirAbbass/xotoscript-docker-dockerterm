@@ -1,5 +1,5 @@
-<h1 align="center">Welcome to xotospheres! 👋</h1>
-> 💨 ubuntu machine with docker
+<h1 align="center">Welcome to dockerterm! 👋</h1>
+> 💨 a machine with docker
 
 ### 🤷🏼‍♂️ prerequisite
 - Docker v3
@@ -11,7 +11,7 @@
 git clone https://github.com/xotoscript/xotoscript-docker-dockerterm.git ./dockerterm
 ```
 
-## RUN WITH DOCKER
+## run with docker
 ```shell
 # build and run from project folder name
 docker-compose build --no-cache && docker run -it --rm dockerterm-dockerterm
