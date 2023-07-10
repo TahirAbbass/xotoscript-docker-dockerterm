@@ -1,5 +1,5 @@
-<h1 align="center">Welcome to dockerterm! 👋</h1>
-➡️ 💨 a machine with docker
+<h1 align="center">Welcome to dockerterm! 👋 terminal setup with docker</h1>
+
 
 ### 🤷🏼‍♂️ prerequisite
 - Docker v3
