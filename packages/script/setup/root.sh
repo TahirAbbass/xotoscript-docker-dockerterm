@@ -12,7 +12,7 @@ set -ex &&
     wget \
     curl \
     xsel \
-    python \
+    python3 \
     xdg-utils \
     zsh \
     peco \

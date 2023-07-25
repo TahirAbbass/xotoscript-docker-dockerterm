@@ -31,12 +31,20 @@ ENV ZSH_CUSTOM=${USER_HOME}/.oh-my-zsh/custom
 ARG DOTFILE_REPO=DOTFILE_REPO
 ARG REPO_PATH=REPO_PATH
 
+# Set DEBIAN_FRONTEND to noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
+
 # STARTER PACK
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 COPY $REPO_PATH ./setup
 RUN chmod a+x /setup/*.sh
+
+RUN apt-get update
+RUN apt-get install dos2unix
+RUN find ./setup -type f -name "*.sh" -exec dos2unix {} +
+
 
 RUN /setup/user.sh
 RUN /setup/root.sh
