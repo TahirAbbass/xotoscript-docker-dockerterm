@@ -1,11 +1,14 @@
 #!/bin/bash
 
-# Read variable values from .env file using sed
-while IFS= read -r line; do
-  if [[ "$line" =~ ^[[:alnum:]_]+= ]]; then
-    eval "$line"
-  fi
-done < .env
+# run this file through following command:
+#sudo ./packages/script/setup.sh
+
+set -x
+# Load variables from .env file
+if [ -f .env ]; then
+   source .env
+fi
+
 
 echo "USER_NAME=$USER_NAME"
 
@@ -37,36 +40,39 @@ echo "NERDS_FONT_VERSION=$NERDS_FONT_VERSION"
 echo "FZF_VERSION=$FZF_VERSION"
 echo "GITSTATUS_VERSION=$GITSTATUS_VERSION"
 
-# # SCRIPT
+apt-get update
+apt-get install dos2unix
+find ./packages/script/setup -type f -name "*.sh" -exec dos2unix {} +
+dos2unix .env
 
-# sudo chmod a+x ./script/setup/*.sh
+# # SCRIPT
+sudo chmod a+x ./packages/script/setup/*.sh
+
 
 # # ROOT
-
-# sudo sh ./script/setup/root.sh
+sudo ./packages/script/setup/root.sh
 
 # # USER
+sudo  ./packages/script/setup/apts.sh
+sudo  ./packages/script/setup/language.sh
+sudo  ./packages/script/setup/database.sh
+sudo  ./packages/script/setup/zsh.sh
+sudo  ./packages/script/setup/package.sh
 
-# sudo sh ./script/setup/apts.sh
-# sudo sh ./script/setup/language.sh
-# sudo sh ./script/setup/database.sh
-# sudo sh ./script/setup/zsh.sh
-# sudo sh ./script/setup/package.sh
+cp -o $USER_NAME ./packages/script/setup/ccat /usr/local/bin/
 
-# cp -o $USER_NAME ./script/setup/ccat /usr/local/bin/
-
-# sudo sh ./script/setup/clean.sh
+sudo  ./packages/script/setup/clean.sh
 
 # zsh
 
 # FINISH
-# echo " ___________________   ";
-# echo "	< FINISHED >         ";
-# echo " -------------------   ";
-# echo "   \                   ";
-# echo "    \                  ";
-# echo "        .--.           ";
-# echo "       |o_o |          ";
-# echo "       |:_/ |          ";
-# echo "      //   \ \         ";
-# echo "     (|     | )        ";
+echo " ___________________   ";
+echo "	< FINISHED >         ";
+echo " -------------------   ";
+echo "   \                   ";
+echo "    \                  ";
+echo "        .--.           ";
+echo "       |o_o |          ";
+echo "       |:_/ |          ";
+echo "      //   \ \         ";
+echo "     (|     | )        ";

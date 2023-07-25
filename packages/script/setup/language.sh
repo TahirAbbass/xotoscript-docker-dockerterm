@@ -1,3 +1,11 @@
+#!/bin/bash
+set -x
+# Load variables from .env file
+if [ -f .env ]; then
+   source .env
+fi
+
+
 # GO
 
 curl -OL https://golang.org/dl/go1.16.7.linux-amd64.tar.gz
@@ -6,7 +14,7 @@ rm -rf go1.16.7.linux-amd64.tar.gz
 
 # JAVA
 
-sudo add-apt-repository ppa:linuxuprising/java
+echo | sudo add-apt-repository ppa:linuxuprising/java
 sudo apt update
 
 set -ex &&
@@ -15,7 +23,7 @@ set -ex &&
 
 # PYTHON
 
-sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"
+echo | sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"
 sudo apt update
 
 set -ex &&

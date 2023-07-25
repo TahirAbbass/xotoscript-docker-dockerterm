@@ -1,3 +1,9 @@
+#!/bin/bash
+set -x
+# Load variables from .env file
+if [ -f .env ]; then
+   source .env
+fi
 
 # ZSH INSTALLATION
 

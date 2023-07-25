@@ -1,3 +1,10 @@
+#!/bin/bash
+set -x
+# Load variables from .env file
+if [ -f .env ]; then
+   source .env
+fi
+
 # MONGO
 
 sudo wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
