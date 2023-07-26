@@ -1,14 +1,14 @@
 #!/bin/bash
+
 set -x
-# Load variables from .env file
+
+# LOAD .ENV FILE
+
 if [ -f .env ]; then
    source .env
 fi
 
-
 sudo curl -fsSL https://raw.githubusercontent.com/creationix/nvm/v${NVM_VERSION}/install.sh  | bash
-
-
 
 echo "NVM_VERSION=$NVM_VERSION"
 echo "NEOVIM_VERSION=$NEOVIM_VERSION"

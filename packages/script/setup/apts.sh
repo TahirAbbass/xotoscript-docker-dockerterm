@@ -1,9 +1,13 @@
 #!/bin/bash
+
 set -x
-# Load variables from .env file
+
+# LOAD .ENV FILE
+
 if [ -f .env ]; then
    source .env
 fi
+
 # EDITOR
 
 sudo apt-get install --yes --no-install-recommends --allow-unauthenticated \
@@ -28,25 +32,28 @@ sudo git config --global color.ui true
 
 # NODE
 
-
 curl -fsSL https://raw.githubusercontent.com/creationix/nvm/v${NVM_VERSION}/install.sh | bash
 
-# Check if NVM is installed and set up
+# CHECK IF NVM IS INSTALLED AND SET UP
+
 if [ -s "${USER_HOME}/.nvm/nvm.sh" ]; then
   export NVM_DIR="${USER_HOME}/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
 
-# Now, NVM should be available in the current shell
-# Install Node.js version 15
+# NOW, NVM SHOULD BE AVAILABLE IN THE CURRENT SHELL INSTALL NODE.JS VERSION 15
+
 nvm install v15
 
-# Use Node.js version 15
+# USE NODE.JS VERSION 15
+
 nvm use v15
 
-# Install Yarn globally
+# INSTALL YARN GLOBALLY
+
 npm install -g yarn
+
 # DOCKER
 
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -

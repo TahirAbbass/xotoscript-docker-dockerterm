@@ -1,10 +1,12 @@
 #!/bin/bash
+
 set -x
-# Load variables from .env file
+
+# LOAD .ENV FILE
+
 if [ -f .env ]; then
    source .env
 fi
-
 
 # GO
 

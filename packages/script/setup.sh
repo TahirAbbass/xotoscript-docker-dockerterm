@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # run this file through following command:
-#sudo ./packages/script/setup.sh
+# sudo ./packages/script/setup.sh
 
 set -x
-# Load variables from .env file
+
+# LOAD .ENV FILE
+
 if [ -f .env ]; then
    source .env
 fi
-
 
 echo "USER_NAME=$USER_NAME"
 
@@ -46,13 +47,15 @@ find ./packages/script/setup -type f -name "*.sh" -exec dos2unix {} +
 dos2unix .env
 
 # # SCRIPT
+
 sudo chmod a+x ./packages/script/setup/*.sh
 
-
 # # ROOT
+
 sudo ./packages/script/setup/root.sh
 
 # # USER
+
 sudo  ./packages/script/setup/apts.sh
 sudo  ./packages/script/setup/language.sh
 sudo  ./packages/script/setup/database.sh
