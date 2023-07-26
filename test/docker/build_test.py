@@ -3,7 +3,8 @@ import platform
 
 import pytest
 
-# ENVIRON
+#ENV
+
 HOME_PATH = os.environ['HOME']
 ROOT = 'root'
 USER_NAME = 'xotosphere'

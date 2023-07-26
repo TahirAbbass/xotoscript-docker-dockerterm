@@ -1,45 +1,47 @@
-<h1 align="center">Welcome to dockerterm! 👋 terminal setup with docker</h1>
+<h1 align="center">Welcome to dockerterm! 👋 terminal bootstrap with docker</h1>
 
-### 🤷🏼‍♂️ prerequisite
+### 🤷🏼‍♂️ PREREQUISITE
 
 - Docker v3
 - Bash
 
-### ➡️ clone
+### ➡️ CLONE
 
 ```shell
-# ⚠️ important : clone this way :
+# ⚠️ IMPORTANT => CLONE THIS WAY :
 git clone https://github.com/xotoscript/xotoscript-docker-dockerterm.git ./dockerterm
 ```
 
-### 👾 run with docker
+### 👾 RUN WITH DOCKER
 
 ```shell
-# build and run from project folder name
+# BUILD AND RUN FROM PROJECT FOLDER NAME
 docker-compose build --no-cache && docker run -it --rm dockerterm-dockerterm
 ```
 
-### 🚀 run with shell
+### 🚀 RUN WITH SHELL
 
 ```shell
-# run shell on a new instance of ubuntu
+# RUN SHELL ON A NEW INSTANCE OF UBUNTU
 sh ./packages/setup.sh
 ```
 
-### ☁️ push to docker
+### ☁️ PUSH TO DOCKER
 
 ```shell
-# login to docker hub
+# LOGIN TO DOCKER HUB
 docker login
-# push to docker hub
+
+# PUSH TO DOCKER HUB
 docker push {DOCKER_USERNAME}/dockerterm-dockerterm
-# run machine from remote
+
+# RUN MACHINE FROM REMOTE
 cd /home docker run --rm -it -v $PWD:/{USERNAME} {DOCKER_USERNAME}/dockerterm-dockerterm:latest
 ```
 
-### 🧽 clean
+### 🧽 CLEAN
 
 ```shell
-# clean full docker
+# CLEAN FULL DOCKER
 sh clean
 ```

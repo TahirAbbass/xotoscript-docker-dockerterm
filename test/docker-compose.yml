@@ -9,6 +9,7 @@ services:
       - base-image
 
   # BASE IMAGE TO BE TESTED BY SUT
+
   base-image:
     image: dockerterm/base-image:sut
     build: .

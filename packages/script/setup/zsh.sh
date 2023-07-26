@@ -31,8 +31,7 @@ GITSTATUS_SHA256="e33867063f091d3c31ede9916fef079ff8cd6fdcc70d051914f962ab3b8f36
   sudo rm gitstatus.tgz
 
 # STARSHIP
-
-sudo sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --yes
+# sudo sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --yes
 
 # MAIN CONFIG
 

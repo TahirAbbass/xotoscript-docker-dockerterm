@@ -1,6 +1,8 @@
-# FROM ubuntu:latest as base
-
 FROM ubuntu:20.04
+
+#################
+# VARIABLES START
+#################
 
 # PROFILE
 
@@ -31,8 +33,11 @@ ENV ZSH_CUSTOM=${USER_HOME}/.oh-my-zsh/custom
 ARG DOTFILE_REPO=DOTFILE_REPO
 ARG REPO_PATH=REPO_PATH
 
-# Set DEBIAN_FRONTEND to noninteractive
 ARG DEBIAN_FRONTEND=noninteractive
+
+#################
+# VARIABLES END
+#################
 
 # STARTER PACK
 
@@ -43,8 +48,10 @@ RUN chmod a+x /setup/*.sh
 
 RUN apt-get update
 RUN apt-get install dos2unix
+
 RUN find ./setup -type f -name "*.sh" -exec dos2unix {} +
 
+# ROOT SCRIPTS
 
 RUN /setup/user.sh
 RUN /setup/root.sh
@@ -52,13 +59,19 @@ RUN /setup/root.sh
 USER $USER_NAME
 WORKDIR ${USER_HOME}
 
+# USER SCRIPTS
+
 RUN /setup/apts.sh
 RUN /setup/language.sh
 RUN /setup/database.sh
 RUN /setup/zsh.sh
 RUN /setup/package.sh
 
-COPY --chown=$USER_NAME:$USER_GROUP $REPO_PATH/starship.toml ${USER_HOME}/.config/starship.toml
+# FILES COPIED
+
+COPY --chown=$USER_NAME:$USER_GROUP $REPO_PATH/spaceship.zsh ${USER_HOME}/.config/spaceship.zsh
+
+# CLEANUP
 
 RUN /setup/clean.sh
 
