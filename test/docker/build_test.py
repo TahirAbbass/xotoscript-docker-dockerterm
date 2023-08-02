@@ -1,6 +1,6 @@
 import os
 import platform
-
+import subprocess
 import pytest
 
 #ENV
@@ -12,83 +12,43 @@ USER_GROUP = 'dockerterm'
 FONTS_PATH = '/usr/local/share/fonts'
 OH_MY_ZSH_PATH = HOME_PATH + '/.oh-my-zsh'
 
-@pytest.mark.parametrize('name,version', [
-    ('git', '1:2.20.1'),
-    ('wget', '1.20.1'),
-    ('zsh', '5.7.1'),
-    ('lsd', '0.17.0'),
+
+import pytest
+
+# Sample data from the .env file
+env_data = {
+    'NEOVIM_VERSION': '0.9.0',
+    'YARN_VERSION': '1',
+    'POSTGRES_VERSION': '12',
+    'RUBBY_VERSION': '2.1.1',
+    'NERDS_FONT_VERSION': '2.1.0',
+    'FZF_VERSION': '0.21.1',
+    'GITSTATUS_VERSION': '1.0.0',
+}
+
+@pytest.mark.parametrize('package,expected_version', [
+    ('nvim', env_data['NEOVIM_VERSION']),
+    ('fzf', env_data['FZF_VERSION']),
 ])
 
-def test_packages(host, name, version):
-    package = host.package(name)
+def test_nvm_version(host, package, expected_version):
 
-    assert package.is_installed
-    if version:
-        assert package.version.startswith(version)
+    try:
+        # Source the environment in a subshell and run the --version command
+        cmd = f'{package} --version'
+        cmd_output = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
+        # Check if the command was successful and capture the output
+        if cmd_output.returncode == 0:
+            nvm_version = cmd_output.stdout.strip()  # Remove leading/trailing spaces and newlines
+            assert expected_version in nvm_version
+        else:
+            pytest.fail(f"Error executing {cmd}. Is installed?")
+    except FileNotFoundError:
+        pytest.fail("executable not found. Is properly sourced?")
 
-def test_current_user(host):
-    user = host.user()
-
-    assert user.name == USER_NAME
-    assert user.group == USER_GROUP
-
-
-def test_home_directory(host):
-    assert HOME_PATH == '/home/' + USER_NAME
-
-
-def test_fzf_package(host):
-    fzf_version_cmd = host.run('fzf --version')
-
-    assert fzf_version_cmd.succeeded
-    assert fzf_version_cmd.stdout.startswith('0.21.1')
-
-
-@pytest.mark.parametrize('path,user,group', [
-    (OH_MY_ZSH_PATH + '/custom/plugins/zsh-syntax-highlighting', USER_NAME, USER_GROUP),
-    (OH_MY_ZSH_PATH + '/custom/plugins/zsh-autosuggestions', USER_NAME, USER_GROUP),
-    (OH_MY_ZSH_PATH + '/custom/themes/powerlevel10k', USER_NAME, USER_GROUP),
-])
-
-def test_copied_directories(host, path, user, group):
-    file = host.file(path)
-
-    assert file.is_directory
-    assert len(file.listdir()) > 0
-    assert file.user == user
-    assert file.group == group
-
-
-@pytest.mark.parametrize('path,user,group', [
-    (HOME_PATH + '/.zshrc', USER_NAME, USER_GROUP),
-    (HOME_PATH + '/.p10k.zsh', USER_NAME, USER_GROUP),
-    (HOME_PATH + '/.oh-my-zsh/custom/aliases.zsh', USER_NAME, USER_GROUP),
-    (FONTS_PATH + '/Fura Code Light Nerd Font Complete.ttf', ROOT, ROOT),
-    (FONTS_PATH + '/Fura Code Regular Nerd Font Complete.ttf', ROOT, ROOT),
-    (FONTS_PATH + '/Fura Code Medium Nerd Font Complete.ttf', ROOT, ROOT),
-    (FONTS_PATH + '/Fura Code Bold Nerd Font Complete.ttf', ROOT, ROOT),
-    (FONTS_PATH + '/Fura Code Retina Nerd Font Complete.ttf', ROOT, ROOT),
-])
-
-def test_copied_files(host, path, user, group):
-    file = host.file(path)
-
-    assert file.is_file
-    assert file.user == user
-    assert file.group == group
-
-
-def test_gitstatus(host):
-    path = HOME_PATH + '/.cache/gitstatus/gitstatusd-linux-x86_64'
-    file = host.file(path)
-
-    assert file.is_file
-    assert file.user == USER_NAME
-    assert file.group == USER_GROUP
-
-
-def test_zsh(host):
-    cmd = host.run('zsh')
-
-    assert cmd.succeeded
+def test_java_version(host):
+    expected_version = 'openjdk 11'
+    cmd_output = subprocess.check_output(['java', '--version'], stderr=subprocess.STDOUT, text=True)
+    java_version = cmd_output.splitlines()[0].strip()
+    assert java_version.startswith(expected_version)

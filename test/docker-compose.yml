@@ -1,15 +1,10 @@
-version: "3.9"
-
+version: "3"
 services:
-  sut:
+  testserv:
     build:
-      context: .
+      context: ./test/docker
       dockerfile: Dockerfile
+    # volumes:
+    #   - .:/app
     depends_on:
-      - base-image
-
-  # BASE IMAGE TO BE TESTED BY SUT
-
-  base-image:
-    image: dockerterm/base-image:sut
-    build: .
+      - dockerterm_dockerterm

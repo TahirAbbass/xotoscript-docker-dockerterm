@@ -1,21 +1,29 @@
-FROM dockerterm/testinfra:5.2.2-python-3.8.5-slim-buster as test-testinfra
-FROM dockerterm/base-image:sut as test-build
+# Multi-stage Docker build for tests
 
-# fix issue "/usr/local/bin/python: error while loading shared libraries: libpython3.8.so.1.0: cannot open shared object file: No such file or directory"
+# Stage 1: Build the dockerterm_dockerterm image (if not already available)
 
-ENV LD_LIBRARY_PATH=/usr/local/lib
+FROM dockerterm_dockerterm as base
 
-ARG DOCKER_TEST_DIR=./docker/test
+# No need to do anything here, as the image is already built in the previous step
+# This stage will only run if the `dockerterm_dockerterm` image is not available locally
 
-RUN mkdir -p $DOCKER_TEST_DIR
+# Stage 2: Build the test container
 
-WORKDIR $DOCKER_TEST_DIR
+FROM base
 
-COPY --from=test-testinfra /usr/local/lib /usr/local/lib
-COPY --from=test-testinfra /usr/local/bin /usr/local/bin
+# Copy the test files to the container
+COPY . /app
 
-# COPY --chown=$USER_NAME:$USER_GROUP ./test .
+# Install dependencies (including pytest)
+RUN pip install pytest pytest-docker-tools pytest-testinfra
 
-COPY --chown=$USER_NAME:$USER_GROUP ./ .
+# Set the working directory
+WORKDIR /app
 
-ENTRYPOINT ["pytest"]
+# Set the permissions to full access for the /app folder
+RUN sudo chown -R 1000:1000 /app
+
+# Switch to a non-root user
+USER 1000
+
+CMD ["python3", "-m", "pytest", "build_test.py"]
