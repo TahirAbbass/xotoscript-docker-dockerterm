@@ -45,3 +45,9 @@ cd /home docker run --rm -it -v $PWD:/{USERNAME} {DOCKER_USERNAME}/dockerterm-do
 # CLEAN FULL DOCKER
 sh clean
 ```
+### 🧽 test
+```shell
+sudo docker-compose build
+sudo docker-compose -f test/docker-compose.yml build
+sudo docker-compose -f test/docker-compose.yml run --rm testserv
+```
