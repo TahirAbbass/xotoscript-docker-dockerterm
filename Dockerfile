@@ -50,7 +50,6 @@ RUN apt-get update
 RUN apt-get install dos2unix
 
 RUN find ./setup -type f -name "*.sh" -exec dos2unix {} +
-RUN dos2unix .env
 
 # ROOT SCRIPTS
 
