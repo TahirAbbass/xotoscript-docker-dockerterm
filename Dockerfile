@@ -47,7 +47,7 @@ COPY $REPO_PATH ./setup
 RUN chmod a+x /setup/*.sh
 
 RUN apt-get update
-RUN apt-get -y install dos2unix --no-install-recommends
+RUN apt-get install dos2unix
 
 RUN find ./setup -type f -name "*.sh" -exec dos2unix {} +
 
