@@ -1,7 +1,7 @@
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode
+# created by https://www.toptal.com/developers/gitignore/api/visualstudiocode
+# edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode
 
-### VisualStudioCode ###
+### visualstudiocode ###
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -10,7 +10,7 @@
 *.code-workspace
 node_modules
 
-# Ignore all local history of files
+# ignore all local history of files
 .history
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
+# end of https://www.toptal.com/developers/gitignore/api/visualstudiocode
