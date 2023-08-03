@@ -16,7 +16,7 @@ git clone https://github.com/xotoscript/xotoscript-docker-dockerterm.git ./docke
 
 ```shell
 # BUILD AND RUN FROM PROJECT FOLDER NAME
-docker-compose build --no-cache && docker run -it --rm dockerterm-dockerterm
+sudo docker-compose build --no-cache && sudo docker run -it --rm dockerterm_dockerterm
 ```
 
 ### 🚀 RUN WITH SHELL
@@ -45,7 +45,9 @@ cd /home docker run --rm -it -v $PWD:/{USERNAME} {DOCKER_USERNAME}/dockerterm-do
 # CLEAN FULL DOCKER
 sh clean
 ```
+
 ### 🧽 test
+
 ```shell
 sudo docker-compose build
 sudo docker-compose -f test/docker-compose.yml build

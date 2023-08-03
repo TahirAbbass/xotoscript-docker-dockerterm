@@ -2,6 +2,7 @@ version: "3.9"
 services:
   dockerterm:
     container_name: dockerterm
+    image: dockerterm_dockerterm
 
     build:
       context: .
