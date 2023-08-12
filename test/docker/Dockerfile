@@ -30,4 +30,4 @@ RUN sudo chown -R 1000:1000 /app
 # switch to a non-root user
 USER 1000
 
-CMD ["python3", "-m", "pytest", "build_test.py"]
+CMD ["sh", "-c", "python3 -m pytest ./tests/*"]

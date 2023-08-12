@@ -10,9 +10,11 @@ fi
 
 # GO
 
-curl -OL https://golang.org/dl/go1.16.7.linux-amd64.tar.gz
-sudo tar -C /usr/local -xvf go1.16.7.linux-amd64.tar.gz
-rm -rf go1.16.7.linux-amd64.tar.gz
+# curl -OL https://golang.org/dl/go1.16.7.linux-amd64.tar.gz
+# sudo tar -C /usr/local -xvf go1.16.7.linux-amd64.tar.gz
+# rm -rf go1.16.7.linux-amd64.tar.gz
+
+sudo apt-get install  --yes --no-install-recommends --allow-unauthenticated golang-go
 
 # JAVA
 

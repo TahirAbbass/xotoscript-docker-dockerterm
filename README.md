@@ -12,18 +12,26 @@
 git clone https://github.com/xotoscript/xotoscript-docker-dockerterm.git ./dockerterm
 ```
 
-### 👾 RUN WITH DOCKER
+### 👾 BUILD AND RUN WITH DOCKER
 
 ```shell
 # BUILD AND RUN FROM PROJECT FOLDER NAME
-sudo docker-compose build --no-cache && sudo docker run -it --rm dockerterm_dockerterm
+sudo docker-compose build --no-cache
+sudo docker run -it --rm dockerterm_dockerterm
+```
+
+### 👾 RUN WITH DOCKER AND MOUNT LOCAL ENVIROMENT INTO DOCKER
+
+```shell
+# BUILD AND RUN FROM PROJECT FOLDER NAME
+sudo docker run -it -v ~:/home/xotosphere/localenv --rm dockerterm_dockerterm
 ```
 
 ### 🚀 RUN WITH SHELL
 
 ```shell
 # RUN SHELL ON A NEW INSTANCE OF UBUNTU
-sh ./packages/setup.sh
+sh ./packages/script/setup.sh
 ```
 
 ### ☁️ PUSH TO DOCKER

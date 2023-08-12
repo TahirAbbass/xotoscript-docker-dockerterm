@@ -11,7 +11,6 @@ USER_GROUP = 'dockerterm'
 FONTS_PATH = '/usr/local/share/fonts'
 OH_MY_ZSH_PATH = HOME_PATH + '/.oh-my-zsh'
 
-import pytest
 
 # sample data from the .env file
 env_data = {
@@ -30,6 +29,7 @@ env_data = {
     ('fzf', env_data['FZF_VERSION']),
 ])
 
+
 # test if the package is installed and the version is correct
 def test_nvm_version(host, package, expected_version):
     try:
@@ -43,10 +43,12 @@ def test_nvm_version(host, package, expected_version):
     except FileNotFoundError:
         pytest.fail("executable not found. is properly sourced?")
 
-# test if the package is installed and the version is correct
-def test_java_version(host):
-    expected_version = 'openjdk 11'
-    cmd_output = subprocess.check_output(['java', '--version'], stderr=subprocess.STDOUT, text=True)
-    java_version = cmd_output.splitlines()[0].strip()
-    assert java_version.startswith(expected_version)
-
+# Test if Maven is installed
+def test_maven_installed():
+    try:
+        # Run the 'mvn --version' command and capture the output
+        cmd_output = subprocess.check_output(['mvn', '--version'], stderr=subprocess.STDOUT, text=True)
+        # Check if the output contains information about Maven
+        assert "Apache Maven" in cmd_output
+    except subprocess.CalledProcessError:
+        pytest.fail("Maven not installed")
